@@ -9,12 +9,14 @@
     </div>
 
     <!-- Alert Message -->
-    <div class="mb-6 bg-green-100 border border-green-200 text-green-700 px-4 py-3 rounded-lg relative">
-        <span class="block sm:inline">Data berhasil ditambahkan!</span>
-        <button class="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+    @if(session('success'))
+        <div class="mb-6 bg-green-100 border border-green-200 text-green-700 px-4 py-3 rounded-lg relative">
+            <span class="block sm:inline">{{ session('success') }}</span>
+            <button class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    @endif
 
     <!-- Main Content Card -->
     <div class="bg-white rounded-lg shadow-sm">
@@ -34,51 +36,24 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($categories as $key => $category)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kategori 1</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $key + 1 }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $category->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                <button class="text-blue-500 hover:text-blue-700" title="Lihat Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="text-yellow-500 hover:text-yellow-700" title="Edit Data">
+                                <a href="{{ route('admin.kategori.edit', $category->id) }}" class="text-yellow-500 hover:text-yellow-700" title="Edit Data">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-500 hover:text-red-700" title="Hapus Data">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                </a>
+                                <form action="{{ route('admin.kategori.destroy', $category->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700" title="Hapus Data" onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
-                        <tr class="bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kategori 2</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                <button class="text-blue-500 hover:text-blue-700" title="Lihat Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="text-yellow-500 hover:text-yellow-700" title="Edit Data">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-500 hover:text-red-700" title="Hapus Data">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Kategori 3</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                <button class="text-blue-500 hover:text-blue-700" title="Lihat Detail">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="text-yellow-500 hover:text-yellow-700" title="Edit Data">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-500 hover:text-red-700" title="Hapus Data">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -86,18 +61,10 @@
             <!-- Pagination -->
             <div class="mt-4 flex items-center justify-between">
                 <div class="text-sm text-gray-500">
-                    Menampilkan 1-3 dari 3 kategori
+                    Menampilkan {{ $categories->firstItem() }}-{{ $categories->lastItem() }} dari {{ $categories->total() }} kategori
                 </div>
-            </div>
-             <!-- Pagination -->
-             <div class="mt-4 flex items-center justify-between">
-                <div class="text-sm text-gray-500">
-                    Menampilkan 1-3 dari 3 data
-                </div>
-                <div class="flex space-x-2">
-                    <button class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-50">Sebelumnya</button>
-                    <button class="px-3 py-1 border rounded bg-blue-500 text-white">1</button>
-                    <button class="px-3 py-1 border rounded text-gray-500 hover:bg-gray-50">Selanjutnya</button>
+                <div>
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>
