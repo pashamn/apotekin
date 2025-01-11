@@ -14,4 +14,8 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('produk', [DashboardController::class, 'produk'])->name('admin.produk');
     Route::get('orders', [DashboardController::class, 'orders'])->name('admin.orders');
     Route::get('users', [DashboardController::class, 'users'])->name('admin.users');
+    Route::get('order', [DashboardController::class, 'order'])->name('admin.order');
+    Route::get('categories', [DashboardController::class, 'categories'])->name('admin.categories');
+    Route::get('analis', [DashboardController::class, 'analis'])->name('admin.analis');
+    Route::get('seting', [DashboardController::class, 'seting'])->name('admin.seting');
 });

@@ -20,4 +20,16 @@ class DashboardController extends Controller
     public function users(){
         return view('admin.users.index');
     }
+    public function order(){
+        return view('admin.order.index');
+    }
+    public function categories(){
+        return view('admin.categories.index');
+    }
+    public function analis(){
+        return view('admin.analis.index');
+    }
+    public function seting(){
+        return view('admin.seting.index');
+    }
 }
