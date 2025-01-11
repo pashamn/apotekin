@@ -4,7 +4,7 @@
 <div class="container mx-auto mt-8">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-gray-800">Edit Kategori</h2>
-        <a href="{{ route('admin.kategori') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">
+        <a href="{{ route('admin.categories') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">
             Kembali
         </a>
     </div>
@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.kategori.update', $category->id) }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8">
         @csrf
         @method('PUT')
 

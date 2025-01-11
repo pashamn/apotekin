@@ -4,7 +4,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-semibold">Tambah Kategori Baru</h2>
-        <a href="{{ route('admin.kategori') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+        <a href="{{ route('admin.categories') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
             <i class="fas fa-arrow-left mr-2"></i>Kembali
         </a>
     </div>
@@ -19,7 +19,7 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.kategori.store') }}" method="POST">
+    <form action="{{ route('admin.categories.store') }}" method="POST">
         @csrf
         <div class="space-y-4">
             <div>
