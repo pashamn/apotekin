@@ -9,6 +9,11 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
