@@ -19,7 +19,7 @@
                 <i class="fas fa-home mr-3"></i>
                 Dashboard
             </a>
-            <a class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700" href="{{route('admin.users')}}">
+            <a class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700" href="{{route('admin.user')}}">
                 <i class="fas fa-users mr-3"></i>
                 Users
             </a>
