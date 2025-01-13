@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected']);
             $table->text('notes')->nullable();
             $table->timestamp('approved_at')->nullable();
