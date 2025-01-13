@@ -25,19 +25,22 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                 <input type="text" name="name" 
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                       placeholder="Masukkan nama lengkap">
             </div>
             
             <div>
                 <label class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" 
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                       placeholder="Masukkan email">
             </div>
             
             <div>
                 <label class="block text-sm font-medium text-gray-700">Password</label>
                 <input type="password" name="password" 
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                       placeholder="Masukkan password">
             </div>
             
             <div>

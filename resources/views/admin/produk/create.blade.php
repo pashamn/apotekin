@@ -9,6 +9,7 @@
         </a>
     </div>
 
+    {{-- Tampilkan pesan error jika ada --}}
     @if ($errors->any())
     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
         <ul class="list-disc list-inside">
@@ -19,10 +20,11 @@
     </div>
     @endif
 
+    {{-- Form untuk menambah produk baru --}}
     <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="space-y-4">
-            <!-- Nama Produk -->
+            <!-- Input Nama Produk -->
             <div>
                 <label class="block text-sm font-medium text-gray-700">Nama Produk</label>
                 <input type="text" name="name" 
@@ -30,7 +32,7 @@
                        value="{{ old('name') }}">
             </div>
 
-            <!-- Harga -->
+            <!-- Input Harga -->
             <div>
                 <label class="block text-sm font-medium text-gray-700">Harga</label>
                 <input type="number" name="price" 
@@ -38,14 +40,14 @@
                        value="{{ old('price') }}">
             </div>
 
-            <!-- Deskripsi -->
+            <!-- Input Deskripsi -->
             <div>
                 <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
                 <textarea name="description" rows="4" 
                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">{{ old('description') }}</textarea>
             </div>
 
-            <!-- Kategori -->
+            <!-- Pilih Kategori -->
             <div>
                 <label class="block text-sm font-medium text-gray-700">Kategori</label>
                 <select name="category_id" 
@@ -59,7 +61,7 @@
                 </select>
             </div>
 
-            <!-- Gambar -->
+            <!-- Input Gambar -->
             <div>
                 <label class="block text-sm font-medium text-gray-700">Gambar Produk</label>
                 <input type="file" name="image" 

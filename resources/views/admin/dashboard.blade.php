@@ -9,7 +9,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-sm text-gray-600">Total Users</h2>
-                <p class="text-2xl font-semibold">120</p> <!-- Data statis -->
+                <p class="text-2xl font-semibold">120</p>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-sm text-gray-600">Total Orders</h2>
-                <p class="text-2xl font-semibold">854</p> <!-- Data statis -->
+                <p class="text-2xl font-semibold">854</p>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-sm text-gray-600">Revenue</h2>
-                <p class="text-2xl font-semibold">$24,567</p> <!-- Data statis -->
+                <p class="text-2xl font-semibold">$24,567</p>
             </div>
         </div>
     </div>
@@ -42,15 +42,13 @@
             </div>
             <div class="ml-4">
                 <h2 class="text-sm text-gray-600">Growth</h2>
-                <p class="text-2xl font-semibold">+12.5%</p> <!-- Data statis -->
+                <p class="text-2xl font-semibold">+12.5%</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Recent Activity & Charts Section -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <!-- Recent Activity -->
     <div class="bg-white rounded-lg shadow-sm">
         <div class="p-6 border-b">
             <h3 class="text-lg font-semibold">Recent Activity</h3>
@@ -63,7 +61,7 @@
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-semibold">New user registered</p>
-                        <p class="text-xs text-gray-500">2 minutes ago</p> <!-- Data statis -->
+                        <p class="text-xs text-gray-500">2 minutes ago</p>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -72,7 +70,7 @@
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-semibold">New order received</p>
-                        <p class="text-xs text-gray-500">15 minutes ago</p> <!-- Data statis -->
+                        <p class="text-xs text-gray-500">15 minutes ago</p>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -81,21 +79,20 @@
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-semibold">New review posted</p>
-                        <p class="text-xs text-gray-500">1 hour ago</p> <!-- Data statis -->
+                        <p class="text-xs text-gray-500">1 hour ago</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Chart -->
     <div class="bg-white rounded-lg shadow-sm">
         <div class="p-6 border-b">
             <h3 class="text-lg font-semibold">Sales Overview</h3>
         </div>
         <div class="p-6">
             <div class="h-64 flex items-center justify-center">
-                <p class="text-gray-500">Chart placeholder - Implement your chart here</p> <!-- Data statis -->
+                <p class="text-gray-500">Chart placeholder - Implement your chart here</p>
             </div>
         </div>
     </div>
