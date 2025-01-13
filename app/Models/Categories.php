@@ -9,15 +9,16 @@ class Categories extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories'; // Nama tabel dalam database
+    protected $table = 'categories';
 
-    /**
-     * Atribut yang dapat diisi secara massal.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'description',
     ];
+
+    // Relasi ke model Product
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
+    }
 }
