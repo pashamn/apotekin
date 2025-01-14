@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\DetailOrderController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     // Orders
     Route::get('orders', [OrderController::class, 'index'])->name('admin.order');
     Route::resource('orders', OrderController::class)->except(['index']);
+    Route::get('/admin/order/{id}', [DetailOrderController::class, 'show'])->name('admin.order.show');
     
     // Analytics
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('admin.analis');
