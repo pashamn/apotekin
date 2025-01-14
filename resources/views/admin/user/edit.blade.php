@@ -25,43 +25,66 @@
 
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap:</label>
-            <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value="{{ $user->name }}" 
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ $user->name }}"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Nama Lengkap"
             >
         </div>
 
         <div class="mb-4">
+            <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Nomor Telepon:</label>
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value="{{ $user->phone }}"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Nomor Telepon"
+            >
+        </div>
+
+        <div class="mb-4">
             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                value="{{ $user->email }}" 
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ $user->email }}"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Email"
             >
         </div>
 
         <div class="mb-4">
-            <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Role:</label>
-            <select 
-                id="role" 
-                name="role" 
+            <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat:</label>
+            <textarea
+                id="alamat"
+                name="alamat"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="alamat"
+                rows="3"
+            >{{ $user->alamat }}</textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="level" class="block text-gray-700 text-sm font-bold mb-2">Role:</label>
+            <select
+                id="level"
+                name="level"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
-                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                <option value="admin" {{ $user->level == 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="user" {{ $user->level == 'user' ? 'selected' : '' }}>User</option>
             </select>
         </div>
 
         <div class="flex items-center justify-center mt-6">
-            <button 
-                type="submit" 
+            <button
+                type="submit"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded focus:outline-none focus:shadow-outline"
             >
                 Update

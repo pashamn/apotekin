@@ -22,14 +22,16 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Kategori</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Deskripsi</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach($categories as $category)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $category->description }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex space-x-2">
                                 <a href="{{ route('admin.categories.edit', $category->id) }}" 

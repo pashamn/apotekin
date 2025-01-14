@@ -28,10 +28,24 @@
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                        placeholder="Masukkan nama lengkap">
             </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Phone</label>
+                <input type="text" name="phone" 
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                       placeholder="Masukkan nama lengkap">
+            </div>
             
             <div>
                 <label class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" 
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                       placeholder="Masukkan email">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Alamat</label>
+                <input type="text" name="alamat" 
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                        placeholder="Masukkan email">
             </div>
@@ -45,7 +59,7 @@
             
             <div>
                 <label class="block text-sm font-medium text-gray-700">Role</label>
-                <select name="role" 
+                <select name="level" 
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
                     <option value="admin">Admin</option>
                     <option value="user">User</option>
