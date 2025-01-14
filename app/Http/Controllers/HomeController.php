@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product; // Pastikan nama model sesuai dengan model Anda
 
 class HomeController extends Controller
 {
@@ -32,16 +33,9 @@ class HomeController extends Controller
             ]
         ];
 
-        return view('home', compact('categories'));
-    }
+        // Ambil produk dari database
+        $products = Product::latest()->take(10)->get(); // Sesuaikan dengan nama tabel Anda
 
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function contact()
-    {
-        return view('contact');
+        return view('home', compact('categories', 'products'));
     }
 }
