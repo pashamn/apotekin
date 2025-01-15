@@ -29,8 +29,8 @@
     </script>
     <style>
         .logo {
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 140px;
         }
         
         /* Optional: styling untuk container */
