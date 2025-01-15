@@ -12,17 +12,28 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+
+        .logo {
+            width: 173px;
+            height: auto;
+        }
+        
+        /* Optional: styling untuk container */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            padding: 2px;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg">
-            <!-- Header -->
-            <h2 class="text-center text-2xl font-bold text-gray-900">Sign in</h2>
-            <p class="mt-2 text-center text-sm text-gray-600">Please use your email to log in</p>
-
-            <!-- Form -->
-            <form class="mt-6 space-y-4" action="#" method="POST">
+        <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
+            <div class="logo-container">
+                <img src="{{ asset('images/apotekin-logo.svg') }}" alt="Logo Apotekin" class="logo">
+            </div>
+            
+            <form class="mt-4 space-y-3" action="#" method="POST">
                 @csrf
 
                 <!-- Email -->
@@ -71,11 +82,12 @@
             </form>
 
             <!-- Signup Link -->
-            <p class="mt-4 text-center text-sm text-gray-600">
+            <p class="mt-3 text-center text-sm text-gray-600">
                 Don’t have an account? 
                 <a href="{{ route('register') }}" class="font-medium text-black hover:underline">Sign up</a>
             </p>
         </div>
+
     </div>
 </body>
 </html>

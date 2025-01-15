@@ -23,16 +23,15 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @foreach($categories as $category)
         <a href="#" class="block p-6 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-            <div class="flex items-center space-x-3">
-                <span class="text-2xl">{!! $category['icon'] !!}</span>
-                <span class="font-medium">{{ $category['name'] }}</span>
+            <div class="text-center">
+                <h3 class="font-semibold text-lg">{{ $category['name'] }}</h3>
             </div>
         </a>
         @endforeach
     </div>
 
     {{-- Products Grid --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-8">
         @foreach($products as $product)
             <div class="bg-white rounded-lg shadow-lg p-4">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg mb-4">

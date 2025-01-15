@@ -18,6 +18,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'index'])->name('search');
+Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('category.products');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
@@ -25,7 +27,9 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// Route::middleware('auth')->group(function () {
 
+// });
 // Admin routes
 Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     // Dashboard
