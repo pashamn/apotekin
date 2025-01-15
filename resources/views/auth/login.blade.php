@@ -14,7 +14,7 @@
         }
 
         .logo {
-            width: 173px;
+            width: auto;
             height: auto;
         }
         
@@ -30,7 +30,7 @@
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
             <div class="logo-container">
-                <img src="{{ asset('images/apotekin-logo.svg') }}" alt="Logo Apotekin" class="logo">
+                <img src="{{ asset('images/apotekin-logo2.svg') }}" alt="Logo Apotekin" class="logo">
             </div>
             
             <form class="mt-4 space-y-3" action="#" method="POST">
@@ -76,7 +76,7 @@
                 <div>
                     <button type="submit" 
                         class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black text-sm font-medium">
-                        Get started
+                        Sign In
                     </button>
                 </div>
             </form>

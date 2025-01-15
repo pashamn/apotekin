@@ -27,6 +27,19 @@
             },
         };
     </script>
+    <style>
+        .logo {
+            width: 100px;
+            height: 100px;
+        }
+        
+        /* Optional: styling untuk container */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            padding: 2px;
+        }
+    </style>
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
 
@@ -35,10 +48,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold">
-                        <span class="text-primary">&#x25BC;</span>apotek
-                    </h1>
+                <div class="logo-container">
+                    <img src="{{ asset('images/apotekin-logo3.svg') }}" alt="Logo Apotekin" class="logo">
                 </div>
 
                 <!-- Navigation Links -->
@@ -98,8 +109,8 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">Login</a>
-                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-primary">Register</a>
+                        <a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">Sign In</a>
+                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-primary">Sign Up</a>
                     @endauth
                 </div>
             </div>
