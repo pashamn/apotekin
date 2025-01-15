@@ -29,8 +29,9 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
-            'category_id' => 'required|exists:categories,id', // Validasi kategori
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi gambar
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'stock' => 'required|numeric|min:0', // Tambahan validasi stok
         ]);
 
         // Upload gambar
@@ -43,6 +44,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'category_id' => $request->category_id,
             'image' => $imagePath,
+            'stock' => $request->stock, // Tambahan field stok
         ]);
 
         return redirect()->route('admin.produk')
@@ -51,24 +53,23 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        // Memuat semua kategori untuk dropdown
-        $categories = Categories::all(); 
+        $categories = Categories::all();
         return view('admin.produk.edit', compact('product', 'categories'));
     }
     
     public function update(Request $request, Product $product)
     {
-        // Validasi input
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
-            'category_id' => 'required|exists:categories,id', // Validasi kategori
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Validasi gambar
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stock' => 'required|numeric|min:0', // Tambahan validasi stok
         ]);
     
         // Update data produk
-        $data = $request->only(['name', 'price', 'description', 'category_id']);
+        $data = $request->only(['name', 'price', 'description', 'category_id', 'stock']); // Tambahan field stok
     
         // Jika ada gambar baru yang diunggah
         if ($request->hasFile('image')) {
@@ -83,15 +84,25 @@ class ProductController extends Controller
     
         $product->update($data);
     
-        // Redirect ke halaman produk dengan pesan sukses
         return redirect()->route('admin.produk')
             ->with('success', 'Produk berhasil diperbarui.');
     }
 
     public function destroy(Product $product)
     {
+        // Hapus gambar jika ada
+        if ($product->image && Storage::exists('public/' . $product->image)) {
+            Storage::delete('public/' . $product->image);
+        }
+        
         $product->delete();
         return redirect()->route('admin.produk')
             ->with('success', 'Produk berhasil dihapus.');
+    }
+
+    public function show(Product $product)
+    {
+        $product->load('category');
+        return view('admin.produk.show', compact('product'));
     }
 }

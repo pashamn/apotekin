@@ -24,7 +24,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                 </tr>
             </thead>
@@ -38,9 +38,20 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ $product->category->name ?? 'Tidak ada kategori' }}</td>
-                    <td class="px-6 py-4">{{ $product->description }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->stock }}</td>
+                        <!-- <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            {{ $product->stok > 10 ? 'bg-green-100 text-green-800' : 
+                               ($product->stok > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
+                            {{ $product->stok }}
+                        </span> -->
+                    <!-- </td> -->
+               
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex space-x-2">
+                            <a href="{{ route('admin.produk.show', $product->id) }}" 
+                               class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
+                                <i class="fas fa-eye"></i>
+                            </a>
                             <a href="{{ route('admin.produk.edit', $product->id) }}" 
                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded">
                                 <i class="fas fa-edit"></i>

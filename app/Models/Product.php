@@ -12,7 +12,8 @@ class Product extends Model
         'price',
         'description',
         'image', // Tambahkan atribut ini jika ada kolom untuk menyimpan URL/path gambar
-        'category_id', // Tambahkan atribut ini untuk relasi kategori
+        'category_id',// Tambahkan atribut ini untuk relasi kategori
+        'stock', // hapus kalau error
     ];
 
     // Relasi ke model Categories

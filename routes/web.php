@@ -59,7 +59,9 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.produk.edit');
     Route::put('products/{product}', [ProductController::class, 'update'])->name('admin.produk.update');
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.produk.destroy');
-    
+    Route::get('products/{product}', [ProductController::class, 'show'])->name('admin.produk.show');// perbaikan di sini
+
+        
     // Orders
     Route::get('orders', [OrderController::class, 'index'])->name('admin.order');
     Route::resource('orders', OrderController::class)->except(['index']);

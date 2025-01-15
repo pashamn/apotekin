@@ -50,6 +50,18 @@
                 placeholder="Harga Produk"
             >
         </div>
+        {{-- Input Harga Produk --}}
+        <div class="mb-4">
+            <label for="stock" class="block text-gray-700 text-sm font-bold mb-2">Stok:</label>
+            <input 
+                type="number" 
+                id="stock" 
+                name="stock" 
+                value="{{ old('price', $product->stock) }}" 
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                placeholder="Stok Produk"
+            >
+        </div>
 
         {{-- Pilih Kategori --}}
         <div class="mb-4">
