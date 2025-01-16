@@ -110,7 +110,6 @@
                         </div>
                     @else
                         <a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">Sign In</a>
-                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-primary">Sign Up</a>
                     @endauth
                 </div>
             </div>
