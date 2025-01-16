@@ -26,6 +26,10 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/product/{id}', [HomeController::class, 'showProduct'])->name('product.show');
 Route::get('/cart', [CartController::class, 'view'])->name('cart.view')->middleware('auth');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+
+
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);

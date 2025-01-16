@@ -11,7 +11,7 @@
                         Upload Resep Dokter
                     </h2>
                     <p class="text-blue-600">
-                        Unggah resep dokter Anda dan kami akan menyiapkan obatnya
+                        Unggas resep dokter Anda dan kami akan menyiapkan obatnya
                     </p>
                 </div>
                 <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
@@ -46,7 +46,9 @@
                     </h3>
                     <p class="text-gray-600 text-sm mb-2">{{ Str::limit($product->description, 50) }}</p>
                     <p class="text-primary text-xl font-semibold">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                    <button class="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                    <button 
+                        class="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300 add-to-cart" 
+                        data-product-id="{{ $product->id }}">
                         Tambah ke Keranjang
                     </button>
                 </div>
@@ -150,4 +152,38 @@
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ product_id: productId })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Gagal menambahkan produk ke keranjang.');
+                })
+                .then(data => {
+                    alert(data.message || 'Produk berhasil ditambahkan ke keranjang.');
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+            });
+        });
+    });
+</script>
+
 @endsection
