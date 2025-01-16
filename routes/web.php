@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\PrescriptionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CartController;
+
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
@@ -23,7 +25,7 @@ Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('categ
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/product/{id}', [HomeController::class, 'showProduct'])->name('product.show');
-
+Route::get('/cart', [CartController::class, 'view'])->name('cart.view')->middleware('auth');
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
@@ -76,6 +78,8 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('prescriptions/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('admin.prescriptions.edit');
     Route::put('prescriptions/{prescription}', [PrescriptionController::class, 'update'])->name('admin.prescriptions.update');
     Route::delete('prescriptions/{prescription}', [PrescriptionController::class, 'destroy'])->name('admin.prescriptions.destroy');
+    
+    //chart
     
     // Settings
     Route::get('settings', [SettingController::class, 'index'])->name('admin.seting');
