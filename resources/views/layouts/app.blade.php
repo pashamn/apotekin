@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Apotek Online</title>
 
     <!-- Import Google Fonts -->
@@ -154,6 +155,7 @@
     
 
     <!-- JavaScript -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
