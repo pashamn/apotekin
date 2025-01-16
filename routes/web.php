@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\DetailOrderController;
-use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\PrescriptionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -68,8 +68,14 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::get('/admin/order/{id}', [DetailOrderController::class, 'show'])->name('admin.order.show');
     
-    // Analytics
-    Route::get('analytics', [AnalyticsController::class, 'index'])->name('admin.analis');
+    // Prescriptions
+    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions');
+    Route::get('prescriptions/create', [PrescriptionController::class, 'create'])->name('admin.prescriptions.create');
+    Route::post('prescriptions', [PrescriptionController::class, 'store'])->name('admin.prescriptions.store');
+    Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show'])->name('admin.prescriptions.show');
+    Route::get('prescriptions/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('admin.prescriptions.edit');
+    Route::put('prescriptions/{prescription}', [PrescriptionController::class, 'update'])->name('admin.prescriptions.update');
+    Route::delete('prescriptions/{prescription}', [PrescriptionController::class, 'destroy'])->name('admin.prescriptions.destroy');
     
     // Settings
     Route::get('settings', [SettingController::class, 'index'])->name('admin.seting');

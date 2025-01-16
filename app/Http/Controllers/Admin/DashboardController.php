@@ -56,9 +56,9 @@ class DashboardController extends Controller
         return view('admin.categories.index');
     }
 
-    public function analis()
+    public function prescriptions()
     {
-        return view('admin.analis.index');
+        return view('admin.prescription.index');
     }
 
     public function seting()

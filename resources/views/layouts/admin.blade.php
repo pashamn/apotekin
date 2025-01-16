@@ -42,13 +42,9 @@
                 <i class="fas fa-shopping-cart mr-3"></i>
                 Orders
             </a>
-            <a class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700" href="{{route('admin.analis')}}">
+            <a class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700" href="{{route('admin.prescriptions')}}">
                 <i class="fas fa-chart-bar mr-3"></i>
                 prescriptions
-            </a>
-            <a class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700" href="{{route('admin.seting')}}">
-                <i class="fas fa-cog mr-3"></i>
-                Settings
             </a>
         </nav>
     </div>
