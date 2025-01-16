@@ -25,30 +25,85 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'stock' => 'required|numeric|min:0', // Tambahan validasi stok
+            'stock' => 'required|numeric|min:0',
         ]);
 
-        // Upload gambar
-        $imagePath = $request->file('image')->store('products', 'public');
+        try {
+            // Upload gambar
+            $imagePath = $request->file('image')->store('products', 'public');
+            
+            // Simpan produk
+            Product::create([
+                'name' => $validated['name'],
+                'price' => $validated['price'],
+                'description' => $validated['description'],
+                'category_id' => $validated['category_id'],
+                'image' => $imagePath,
+                'stock' => $validated['stock'],
+            ]);
 
-        // Simpan produk
-        Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'image' => $imagePath,
-            'stock' => $request->stock, // Tambahan field stok
+            return redirect()->route('admin.produk')
+                ->with('success', 'Produk berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Jika terjadi error, hapus gambar yang sudah diupload
+            if (isset($imagePath) && Storage::exists('public/' . $imagePath)) {
+                Storage::delete('public/' . $imagePath);
+            }
+            
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat menambah produk.')
+                ->withInput();
+        }
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stock' => 'required|numeric|min:0',
         ]);
 
-        return redirect()->route('admin.produk')
-            ->with('success', 'Produk berhasil ditambahkan.');
+        try {
+            $oldImage = $product->image;
+            
+            // Update data produk
+            $data = $validated;
+            unset($data['image']); // Hapus image dari array data jika tidak ada upload baru
+
+            // Jika ada gambar baru yang diunggah
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image')->store('products', 'public');
+                
+                // Hapus gambar lama setelah upload berhasil
+                if ($oldImage && Storage::exists('public/' . $oldImage)) {
+                    Storage::delete('public/' . $oldImage);
+                }
+            }
+
+            $product->update($data);
+
+            return redirect()->route('admin.produk')
+                ->with('success', 'Produk berhasil diperbarui.');
+        } catch (\Exception $e) {
+            // Jika terjadi error dan ada upload gambar baru, hapus gambar baru
+            if (isset($data['image']) && Storage::exists('public/' . $data['image'])) {
+                Storage::delete('public/' . $data['image']);
+            }
+            
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat memperbarui produk.')
+                ->withInput();
+        }
     }
 
     public function edit(Product $product)
@@ -57,36 +112,6 @@ class ProductController extends Controller
         return view('admin.produk.edit', compact('product', 'categories'));
     }
     
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'stock' => 'required|numeric|min:0', // Tambahan validasi stok
-        ]);
-    
-        // Update data produk
-        $data = $request->only(['name', 'price', 'description', 'category_id', 'stock']); // Tambahan field stok
-    
-        // Jika ada gambar baru yang diunggah
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($product->image && Storage::exists('public/' . $product->image)) {
-                Storage::delete('public/' . $product->image);
-            }
-    
-            // Simpan gambar baru
-            $data['image'] = $request->file('image')->store('products', 'public');
-        }
-    
-        $product->update($data);
-    
-        return redirect()->route('admin.produk')
-            ->with('success', 'Produk berhasil diperbarui.');
-    }
 
     public function destroy(Product $product)
     {
