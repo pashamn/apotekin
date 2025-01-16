@@ -40,7 +40,8 @@
                     </div>
 
                     {{-- Tombol --}}
-                    <button class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600">
+                    <button class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 add-to-cart"
+                    data-product-id="{{ $product->id }}">
                         Tambah ke Keranjang
                     </button>
                 </div>
@@ -48,4 +49,36 @@
         </div>
     </div>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ product_id: productId })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Gagal menambahkan produk ke keranjang.');
+                })
+                .then(data => {
+                    alert(data.message || 'Produk berhasil ditambahkan ke keranjang.');
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+            });
+        });
+    });
+</script>
 @endsection
