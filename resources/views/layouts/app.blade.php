@@ -57,7 +57,6 @@
                     <a href="#" class="text-gray-700 hover:text-primary">Home</a>
                     <a href="#" class="text-gray-700 hover:text-primary">About</a>
                     <a href="#" class="text-gray-700 hover:text-primary">Contact Us</a>
-                    <a href="#" class="text-gray-700 hover:text-primary">Blog</a>
                 </div>
 
                 <!-- User Info and Icons -->
