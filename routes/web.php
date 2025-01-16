@@ -22,6 +22,7 @@ Route::get('/search', [HomeController::class, 'index'])->name('search');
 Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('category.products');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/product/{id}', [HomeController::class, 'showProduct'])->name('product.show');
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');

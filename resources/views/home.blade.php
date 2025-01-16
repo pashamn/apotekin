@@ -33,17 +33,23 @@
     {{-- Products Grid --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-8">
         @foreach($products as $product)
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg mb-4">
-                <div>
-                    <h3 class="text-lg font-bold">{{ $product->name }}</h3>
-                    <p class="text-gray-600 text-sm mb-2">{{ $product->description }}</p>
-                    <p class="text-primary text-xl font-semibold">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                    <button class="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
-                        Tambah ke Keranjang
-                    </button>
-                </div>
+        <div class="bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 hover:shadow-xl transition-transform duration-300">
+            <a href="{{ route('product.show', $product->id) }}" class="block">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-90 transition-opacity duration-300">
+            </a>
+            <div>
+                <h3 class="text-lg font-bold">
+                    <a href="{{ route('product.show', $product->id) }}" class="hover:text-blue-500 transition-colors duration-300">
+                        {{ $product->name }}
+                    </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-2">{{ Str::limit($product->description, 50) }}</p>
+                <p class="text-primary text-xl font-semibold">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                <button class="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                    Tambah ke Keranjang
+                </button>
             </div>
+        </div>
         @endforeach
     </div>
 </main>

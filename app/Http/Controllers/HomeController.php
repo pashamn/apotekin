@@ -18,4 +18,13 @@ class HomeController extends Controller
 
         return view('home', compact('categories', 'products'));
     }
+
+    public function showProduct($id)
+    {
+        // Ambil produk berdasarkan ID
+        $product = Product::findOrFail($id);
+
+        // Kirim data produk ke view 'show.blade.php'
+        return view('show', compact('product'));
+    }
 }
