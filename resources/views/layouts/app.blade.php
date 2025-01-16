@@ -52,11 +52,11 @@
                     <img src="{{ asset('images/apotekin-logo3.svg') }}" alt="Logo Apotekin" class="logo">
                 </div>
 
-                <!-- Navigation Links -->
+               <!-- Navigation Links -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-700 hover:text-primary">Home</a>
-                    <a href="#" class="text-gray-700 hover:text-primary">About</a>
-                    <a href="#" class="text-gray-700 hover:text-primary">Contact Us</a>
+                    <a href="/" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary">Contact Us</a>
                 </div>
 
                 <!-- User Info and Icons -->
@@ -150,6 +150,8 @@
 
     <!-- Content -->
     @yield('content')
+
+    
 
     <!-- JavaScript -->
     <script>
