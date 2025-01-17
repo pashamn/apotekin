@@ -92,7 +92,44 @@
                 </button>
             </div>
         </div>
+        <div id="errorModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                <h2 class="text-lg font-bold mb-2 text-red-600">Error!</h2>
+                <p class="text-gray-700">{{ session('error') }}</p>
+                <button onclick="closeModal('errorModal')" 
+                        class="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
+                    Close
+                </button>
+            </div>
+        </div>
     </div>
+    <script>
+        // Function to show modal
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        // Function to close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Show modal on page load if session exists
+        window.onload = () => {
+            @if(session('success'))
+                showModal('successModal');
+            @endif
+            @if(session('error'))
+                showModal('errorModal');
+            @endif
+        };
+    </script>
 
     <script src="{{ asset('js/cart.js') }}"></script>
 </body>

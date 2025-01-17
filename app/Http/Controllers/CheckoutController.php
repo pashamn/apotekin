@@ -103,15 +103,14 @@ class CheckoutController extends Controller
             DB::commit();
     
             return redirect('/')->with('success', 'Pesanan berhasil dibuat!');
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             
             // Log the error for debugging
             \Log::error('Checkout Error: ' . $e->getMessage());
             
-            return redirect()->route('cart.view')
-                ->with('error', 'Terjadi kesalahan saat memproses pesanan.');
+            return redirect()->route('cart.view')->with('error', 'Terjadi kesalahan saat memproses pesanan.');
         }
     }
 }
