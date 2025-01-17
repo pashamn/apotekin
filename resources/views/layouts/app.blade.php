@@ -119,8 +119,7 @@
 
     <!-- Categories Bar -->
     <div class="bg-gray-800 text-white py-4 flex justify-center">
-        <form class="flex items-center w-full max-w-md">
-            <!-- Search Input -->
+        <form class="flex items-center w-full max-w-md" action="{{ route('search') }}" method="GET">
             <div class="relative w-full">
                 <input 
                     type="search" 
@@ -130,8 +129,6 @@
                     placeholder="Cari Obat Yang Dibutuhkan..." 
                     required
                 />
-
-                <!-- Search Button -->
                 <button 
                     type="submit" 
                     class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -141,7 +138,8 @@
                     <span class="sr-only">Search</span>
                 </button>
             </div>
-        </form>
+     </form>
+
     </div>
 
 

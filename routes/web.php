@@ -20,7 +20,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/search', [HomeController::class, 'index'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('category.products');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');

@@ -30,4 +30,24 @@ class HomeController extends Controller
         // Kirim data produk ke view 'show.blade.php'
         return view('show', compact('product'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+    
+        // Ambil produk yang sesuai dengan kata kunci
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->get();
+    
+        // Jika permintaan adalah AJAX, kembalikan data JSON
+        if ($request->ajax()) {
+            return response()->json($products);
+        }
+    
+        // Jika bukan AJAX, kembalikan view dengan hasil pencarian
+        return view('search-results', [
+            'products' => $products,
+            'query' => $query,
+        ]);
+    }
 }
