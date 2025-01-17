@@ -144,7 +144,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-medium text-gray-900">Email</h3>
-                        <p class="mt-1 text-gray-600">info@apotekonline.com</p>
+                        <p class="mt-1 text-gray-600">test@apotekonline.com</p>
                         <p class="text-gray-600">cs@apotekonline.com</p>
                     </div>
                 </div>
