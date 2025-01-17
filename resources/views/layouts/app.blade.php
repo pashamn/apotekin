@@ -101,7 +101,7 @@
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Favorites Items</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Returns</a> -->
                                 <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Resep</a>
-                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
+                                <a href="{{ route('my.setting') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Privacy</a> -->
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
