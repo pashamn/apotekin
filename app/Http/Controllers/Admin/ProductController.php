@@ -36,7 +36,8 @@ class ProductController extends Controller
 
         try {
             // Upload gambar
-            $imagePath = $request->file('image')->store('products', 'public');
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('storage/products'), $imageName);
             
             // Simpan produk
             Product::create([
@@ -44,7 +45,7 @@ class ProductController extends Controller
                 'price' => $validated['price'],
                 'description' => $validated['description'],
                 'category_id' => $validated['category_id'],
-                'image' => $imagePath,
+                'image' => 'products/'.$imageName,
                 'stock' => $validated['stock'],
             ]);
 
