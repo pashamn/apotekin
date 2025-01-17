@@ -44,7 +44,7 @@
                         </div>
 
                         <!-- Product Price -->
-                        <div class="w-24 text-right">${{ number_format($cart->product->price, 2) }}</div>
+                        <div class="w-24 text-right">Rp{{ number_format($cart->product->price, 2) }}</div>
                         <!-- Remove Button -->
                         <button class="text-gray-500 hover:text-red-500">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                 <div class="pt-3 border-t border-gray-200">
                     <div class="flex justify-between font-semibold">
                         <span>Total</span>
-                        <span>${{ number_format($total, 2) }}</span>
+                        <span>Rp{{ number_format($total, 2) }}</span>
                     </div>
                 </div>
             </div>
@@ -81,11 +81,13 @@
             <div class="mt-6 grid grid-cols-2 gap-4">
                 <button 
                     class="w-full py-3 px-4 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 transition"
-                    onclick="window.location.href='{{ url()->previous() }}'">
+                    onclick="window.location.href='{{ route('home') }}'">
                     Continue Shopping
                 </button>
 
-                <button class="w-full py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white transition">
+                <button 
+                    class="w-full py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white transition"
+                    onclick="window.location.href='{{ route('checkout') }}'">
                     Proceed to Checkout
                 </button>
             </div>

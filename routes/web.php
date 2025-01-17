@@ -28,7 +28,12 @@ Route::get('/product/{id}', [HomeController::class, 'showProduct'])->name('produ
 Route::get('/cart', [CartController::class, 'view'])->name('cart.view')->middleware('auth');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+// Route untuk menampilkan halaman checkout
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
+// Route untuk memproses checkout
+Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
