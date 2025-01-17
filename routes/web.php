@@ -34,7 +34,6 @@ Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('car
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
-    Route::post('/my-orders/{id}/order-again', [MyOrderController::class, 'orderAgain'])->name('my.orders.again');
     Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
     Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');

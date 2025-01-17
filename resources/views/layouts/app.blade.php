@@ -62,7 +62,7 @@
 
                 <!-- User Info and Icons -->
                 <div class="flex items-center space-x-4">
-                    <!-- Upload Resep Button -->
+                    <!-- Upload Resep Button
                     <button class="text-gray-700 hover:text-primary flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -70,7 +70,7 @@
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
                         <span class="hidden md:inline text-sm">Upload Resep</span>
-                    </button>
+                    </button> -->
 
                     <!-- Keranjang Belanja -->
                     <a href="/cart" class="text-gray-700 hover:text-primary">
@@ -100,7 +100,7 @@
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Wallet</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Favorites Items</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Returns</a> -->
-                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Account</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Resep</a>
                                 <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Privacy</a> -->
                                 <form action="{{ route('logout') }}" method="POST">

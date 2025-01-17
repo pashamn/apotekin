@@ -19,12 +19,14 @@
                 {{ session('error') }}
             </div>
         @endif
+
         <a href="/" class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
-            Kembali
+            Back
         </a>
+
         <div class="bg-white rounded-lg shadow-sm">
             <!-- Filter Section -->
             <div class="p-4 border-b">
@@ -36,11 +38,11 @@
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" name="filter" value="processing" class="form-radio" {{ request('filter') === 'processing' ? 'checked' : '' }}>
-                        <span class="ml-2">processing</span>
+                        <span class="ml-2">Processing</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" name="filter" value="completed" class="form-radio" {{ request('filter') === 'completed' ? 'checked' : '' }}>
-                        <span class="ml-2">completed</span>
+                        <span class="ml-2">Completed</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" name="filter" value="cancelled" class="form-radio" {{ request('filter') === 'cancelled' ? 'checked' : '' }}>
@@ -73,13 +75,13 @@
                         <td class="p-4">
                             @switch($order->status)
                                 @case('pending')
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">pending</span>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Pending</span>
                                     @break
                                 @case('processing')
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">processing</span>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Processing</span>
                                     @break
                                 @case('completed')
-                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">completed</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Completed</span>
                                     @break
                                 @case('cancelled')
                                     <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Cancelled</span>
@@ -87,27 +89,20 @@
                             @endswitch
                         </td>
                         <td class="p-4 text-right">
-                            <div class="flex justify-end items-center gap-2">
-                                @if($order->status === 'confirmed')
-                                    <form action="{{ route('my.orders.again', $order->id) }}" method="POST" class="inline">
+                            <div class="relative inline-block">
+                                <button class="p-2 hover:bg-gray-100 rounded-full dropdown-toggle">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    </svg>
+                                </button>
+                                <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu">
+                                    <a href="{{ route('my.orders.details', $order->id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Order details</a>
+                                    @if($order->status !== 'cancelled' && $order->status !== 'completed')
+                                    <form action="{{ route('my.orders.cancel', $order->id) }}" method="POST" class="block">
                                         @csrf
-                                        <button type="submit" class="text-gray-600 hover:text-blue-600">
-                                            Order again
-                                        </button>
+                                        <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100">Cancel order</button>
                                     </form>
-                                    <form action="{{ route('my.orders.cancel', $order->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        <button type="submit" class="text-red-600 hover:text-red-800">
-                                            Cancel order
-                                        </button>
-                                    </form>
-                                @endif
-                                <div class="relative inline-block">
-                                    <button class="p-2 hover:bg-gray-100 rounded-full">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        </svg>
-                                    </button>
+                                    @endif
                                 </div>
                             </div>
                         </td>
@@ -139,6 +134,20 @@
             radio.addEventListener('change', (e) => {
                 window.location.href = `{{ route('my.orders') }}?filter=${e.target.value}`;
             });
+        });
+
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.nextElementSibling.classList.toggle('hidden');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-toggle')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.add('hidden');
+                });
+            }
         });
     </script>
 </body>

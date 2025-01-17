@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class MyOrderController extends Controller
@@ -24,22 +25,18 @@ class MyOrderController extends Controller
         return view('my-orders', compact('orders')); // Changed from 'user.my-orders' to 'my-orders'
     }
 
-    public function orderAgain($id)
-    {
-        $order = Order::where('user_id', auth()->id())
-                     ->findOrFail($id);
-                     
-        // Logic untuk membuat order baru berdasarkan order sebelumnya
-        
-        return redirect()->back()->with('success', 'New order created successfully');
-    }
-
     public function orderDetails($id)
     {
-        $order = Order::where('user_id', auth()->id())
+        $orderitem = Order::where('user_id', auth()->id())
+                     ->with('orderItems.product') // Include order items
                      ->findOrFail($id);
+
+        $order = Order::where('user_id', auth()->id())
+                    ->with('orderItems') // Include order items
+                    ->findOrFail($id);
+        $kirim = 10000;
                      
-        return view('order-details', compact('order')); // Changed from 'user.order-details' to 'order-details'
+        return view('order-detail', compact('orderitem','order','kirim')); // Changed from 'user.order-details' to 'order-details'
     }
 
     public function cancelOrder($id)
@@ -54,5 +51,14 @@ class MyOrderController extends Controller
         $order->update(['status' => 'cancelled']);
 
         return redirect()->back()->with('success', 'Order cancelled successfully');
+    }
+
+    public function fetchOrderItems($id)
+    {
+        $order = Order::where('user_id', auth()->id())
+                     ->with('orderItems')
+                     ->findOrFail($id);
+
+        return response()->json(["order_items" => $order->orderItems]);
     }
 }
