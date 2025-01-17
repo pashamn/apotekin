@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+    
     protected $fillable = [
         'order_number',
         'user_id',

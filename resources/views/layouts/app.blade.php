@@ -96,7 +96,7 @@
                                 </svg>
                             </button>
                             <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
-                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Orders</a>
+                                <a href="{{ route('my.orders') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">My Orders</a>
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Wallet</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Favorites Items</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Returns</a> -->
