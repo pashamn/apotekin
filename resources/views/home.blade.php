@@ -8,15 +8,15 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-2xl font-bold text-blue-800 mb-2">
-                        Upload Resep Dokter
+                        Kategori Obat
                     </h2>
-                    <p class="text-blue-600">
+                    <!-- <p class="text-blue-600">
                         Unggah resep dokter Anda dan kami akan menyiapkan obatnya
                     </p>
                 </div>
                 <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                     Upload Sekarang
-                </button>
+                </button> -->
             </div>
         </div>
 

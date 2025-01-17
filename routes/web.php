@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\DetailOrderController;
 use App\Http\Controllers\Admin\PrescriptionController;
-use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CartController;
@@ -45,6 +45,27 @@ Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
+    Route::post('/my-orders/{id}/order-again', [MyOrderController::class, 'orderAgain'])->name('my.orders.again');
+    Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
+    Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
+    Route::get('setting', [SettingController::class, 'index'])->name('my.setting');
+    Route::put('setting/{id}', [SettingController::class, 'updateSettings'])->name('my.setting.update');
+    Route::middleware(['auth', 'can:manage-users'])->group(function () {
+        // Menampilkan daftar pengguna
+        Route::get('/users', [UserSettingsController::class, 'index'])->name('users.index');
+    
+        // Menampilkan form edit pengguna
+        Route::get('/users/{id}/edit', [UserSettingsController::class, 'edit'])->name('users.edit');
+    
+        // Memproses pembaruan pengguna
+        Route::put('/users/{id}', [UserSettingsController::class, 'update'])->name('users.update');
+    
+        // Menghapus pengguna
+        Route::delete('/users/{id}', [UserSettingsController::class, 'destroy'])->name('users.destroy');
+    });
+});
 
 // });
 // Admin routes
@@ -98,5 +119,5 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     //chart
     
     // Settings
-    Route::get('settings', [SettingController::class, 'index'])->name('admin.seting');
+    
 });
