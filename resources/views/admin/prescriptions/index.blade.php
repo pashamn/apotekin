@@ -34,11 +34,13 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $prescription->status }}</td>    
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex space-x-2">
-                            <button type="button" 
-                                    onclick="window.location='{{ route('admin.prescriptions.show', $prescription->id) }}'"
-                                    class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded flex items-center">
+                            <!-- Show Button -->
+                            <a href="{{ route('prescriptions.show', $prescription->id) }}" 
+                               class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded flex items-center">
                                 <i class="fas fa-search mr-1"></i> Show
-                            </button>
+                            </a>
+
+                            <!-- Reject Button -->
                         </div>
                     </td>
                 </tr>

@@ -87,14 +87,11 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::post('admin/prescription/create/orders', [OrderController::class, 'store'])->name('admin.order.store');
     
     // Prescriptions
-    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions');
-    Route::get('prescriptions/create', [PrescriptionController::class, 'create'])->name('admin.prescriptions.create');
-    Route::post('prescriptions', [PrescriptionController::class, 'store'])->name('admin.prescriptions.store');
-    Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show'])->name('admin.prescriptions.show');
-    Route::get('prescriptions/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('admin.prescriptions.edit');
-    Route::put('prescriptions/{prescription}', [PrescriptionController::class, 'update'])->name('admin.prescriptions.update');
-    Route::delete('prescriptions/{prescription}', [PrescriptionController::class, 'destroy'])->name('admin.prescriptions.destroy');
-    Route::post('prescriptions/{prescription}/add-order', [PrescriptionController::class, 'addOrder'])->name('admin.prescriptions.addOrder');
+    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show'])->name('prescriptions.show');
+    Route::put('/admin/prescriptions/{id}', [PrescriptionController::class, 'approve'])->name('admin.prescriptions.approve');
+    Route::put('/admin/prescriptions/{id}/reject', [PrescriptionController::class, 'reject'])->name('admin.prescriptions.reject');
+    Route::post('prescriptions/{id}/add-order', [PrescriptionController::class, 'addOrder'])->name('prescriptions.addOrder');
 
 
     

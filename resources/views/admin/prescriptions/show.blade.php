@@ -5,7 +5,7 @@
    <div class="flex justify-between items-center mb-6 border-b pb-4">
        <h2 class="text-2xl font-bold text-gray-800">Detail Prescription</h2>
        <div class="flex space-x-3">
-           <a href="{{ route('admin.prescriptions') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300">
+           <a href="{{ route('prescriptions.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300">
                Kembali
            </a>
        </div>
@@ -41,103 +41,56 @@
 
            <!-- Tombol Actions -->
            <div class="flex space-x-3">
-               <!-- Tambah Order -->
-               <!-- <button type="button" 
-                  onclick="addOrder('{{ $prescription->id }}')"
-                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 flex items-center">
-                   <i class="fas fa-plus mr-2"></i>Tambah Order
-               </button> -->
-               <!-- Update Status -->
-               <!-- <button type="button" 
-                       onclick="updateStatus('{{ $prescription->id }}')"
-                       class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 flex items-center">
-                   <i class="fas fa-sync-alt mr-2"></i>Update Status
-               </button> -->
                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Update Status
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Persetujuan</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <button type="button" class="btn btn-secondary">Rejected</button>
-      <button type="button" class="btn btn-primary"><a href="{{route('admin.order.create')}}">Accept</a></button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+               <button id="openModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">
+                   Update Status
+               </button>
            </div>
        </div>
    </div>
 </div>
 
-<!-- Script untuk Update Status -->
-<!-- <script>
-function updateStatus(prescriptionId) {
-   const newStatus = prompt('Masukkan status baru (pending/processed/completed):');
-   if (newStatus) {
-       fetch(`/admin/prescriptions/${prescriptionId}/status`, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json',
-               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-           },
-           body: JSON.stringify({ status: newStatus })
-       })
-       .then(response => response.json())
-       .then(data => {
-           if (data.success) {
-               window.location.reload();
-           } else {
-               alert('Gagal mengupdate status');
-           }
-       })
-       .catch(error => {
-           console.error('Error:', error);
-           alert('Terjadi kesalahan saat mengupdate status');
-       });
-   }
-} -->
+<!-- Modal -->
+<div id="exampleModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-lg font-medium text-gray-800">Persetujuan</h2>
+            <button id="closeModal" class="text-gray-600 hover:text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="p-4">
+            <p class="text-gray-600 mb-4">Apakah Anda ingin menyetujui atau menolak pesanan ini?</p>
+            <div class="flex justify-end space-x-2">
+                <!-- Rejected Button -->
+                <form action="{{ route('admin.prescriptions.reject', $prescription->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Rejected</button>
+                </form>
+                <!-- Accept Button -->
+                <form action="{{ route('admin.prescriptions.approve', $prescription->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Accept</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- // Script untuk Tambah Order -->
-<!-- function addOrder(prescriptionId) {
-   const productId = prompt('Masukkan ID produk:');
-   const quantity = prompt('Masukkan jumlah produk:');
-   if (productId && quantity) {
-       fetch(`/admin/prescriptions/${prescriptionId}/add-order`, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json',
-               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-           },
-           body: JSON.stringify({ product_id: productId, quantity: quantity })
-       })
-       .then(response => response.json())
-       .then(data => {
-           if (data.success) {
-               alert('Order berhasil ditambahkan!');
-               window.location.reload();
-           } else {
-               alert('Gagal menambah order');
-           }
-       })
-       .catch(error => {
-           console.error('Error:', error);
-           alert('Terjadi kesalahan saat menambah order');
-       });
-   }
-} -->
+<!-- JavaScript Modal -->
+<script>
+    document.getElementById('openModal').addEventListener('click', () => {
+        document.getElementById('exampleModal').classList.remove('hidden');
+        document.getElementById('exampleModal').classList.add('flex');
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('exampleModal').classList.add('hidden');
+        document.getElementById('exampleModal').classList.remove('flex');
+    });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 @endsection
