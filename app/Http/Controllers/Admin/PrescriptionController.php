@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Prescription;
+use App\Models\Order; // Pastikan model Order diimport
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PrescriptionController extends Controller
 {
@@ -70,4 +72,35 @@ class PrescriptionController extends Controller
 
         return redirect()->route('admin.prescriptions.index')->with('success', 'Prescription deleted successfully!');
     }
+
+    // Add a new order associated with a prescription
+    public function addOrder(Request $request, Prescription $prescription)
+{
+    // Validasi input
+    $validator = Validator::make($request->all(), [
+        'product_id' => 'required|integer|exists:products,id',
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors(),
+        ], 422);
+    }
+
+    // Membuat order baru
+    $order = Order::create([
+        'prescription_id' => $prescription->id,
+        'product_id' => $request->product_id,
+        'quantity' => $request->quantity,
+        'status' => 'pending', // Status awal
+    ]);
+
+    // Merespon dengan sukses
+    return response()->json([
+        'success' => true,
+        'order' => $order,
+    ]);
+}
 }

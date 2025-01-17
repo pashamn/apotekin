@@ -91,6 +91,8 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('admin.order');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::get('/admin/order/{id}', [DetailOrderController::class, 'show'])->name('admin.order.show');
+    Route::get('admin/prescription/create/orders', [OrderController::class, 'create'])->name('admin.order.create');
+    Route::post('admin/prescription/create/orders', [OrderController::class, 'store'])->name('admin.order.store');
     
     // Prescriptions
     Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions');
@@ -100,6 +102,9 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('prescriptions/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('admin.prescriptions.edit');
     Route::put('prescriptions/{prescription}', [PrescriptionController::class, 'update'])->name('admin.prescriptions.update');
     Route::delete('prescriptions/{prescription}', [PrescriptionController::class, 'destroy'])->name('admin.prescriptions.destroy');
+    Route::post('prescriptions/{prescription}/add-order', [PrescriptionController::class, 'addOrder'])->name('admin.prescriptions.addOrder');
+
+
     
     //chart
     
