@@ -23,12 +23,14 @@
         {{-- Categories Grid --}}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($categories as $category)
-            <a href="#" class="block p-6 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors">
-                <div class="text-center">
-                    <h3 class="font-semibold text-lg">{{ $category['name'] }}</h3>
-                </div>
-            </a>
+        <a href="{{ route('home', ['category_id' => $category->id]) }}" 
+        class="block p-6 rounded-lg {{ request('category_id') == $category->id ? 'bg-blue-900' : 'bg-blue-500' }} text-white hover:bg-blue-600 transition-colors">
+            <div class="text-center">
+                <h3 class="font-semibold text-lg">{{ $category->name }}</h3>
+            </div>
+        </a>
             @endforeach
+
         </div>
 
         {{-- Products Grid --}}

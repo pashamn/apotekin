@@ -8,15 +8,18 @@ use App\Models\Product; // Pastikan nama model sesuai dengan model Anda
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        
-
-        // Ambil produk dari database
+        // Ambil semua kategori
         $categories = Categories::all();
-        $products = Product::latest()->take(10)->get(); // Sesuaikan dengan nama tabel Anda
 
-        return view('home', compact('categories', 'products'));
+        // Ambil produk berdasarkan kategori yang dipilih, atau default ke produk terbaru
+        $selectedCategory = $request->get('category_id'); // Ambil parameter category_id dari request
+        $products = Product::when($selectedCategory, function ($query) use ($selectedCategory) {
+            return $query->where('category_id', $selectedCategory);
+        })->latest()->take(10)->get(); // Sesuaikan jumlah produk yang ingin ditampilkan
+
+        return view('home', compact('categories', 'products', 'selectedCategory'));
     }
 
     public function showProduct($id)
