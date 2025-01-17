@@ -19,7 +19,12 @@
                 {{ session('error') }}
             </div>
         @endif
-
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Kembali
+        </a>
         <div class="bg-white rounded-lg shadow-sm">
             <!-- Filter Section -->
             <div class="p-4 border-b">
@@ -30,12 +35,12 @@
                         <span class="ml-2">All</span>
                     </label>
                     <label class="inline-flex items-center">
-                        <input type="radio" name="filter" value="confirmed" class="form-radio" {{ request('filter') === 'confirmed' ? 'checked' : '' }}>
-                        <span class="ml-2">Confirmed</span>
+                        <input type="radio" name="filter" value="processing" class="form-radio" {{ request('filter') === 'processing' ? 'checked' : '' }}>
+                        <span class="ml-2">processing</span>
                     </label>
                     <label class="inline-flex items-center">
-                        <input type="radio" name="filter" value="in_transit" class="form-radio" {{ request('filter') === 'in_transit' ? 'checked' : '' }}>
-                        <span class="ml-2">In Transit</span>
+                        <input type="radio" name="filter" value="completed" class="form-radio" {{ request('filter') === 'completed' ? 'checked' : '' }}>
+                        <span class="ml-2">completed</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" name="filter" value="cancelled" class="form-radio" {{ request('filter') === 'cancelled' ? 'checked' : '' }}>
@@ -64,17 +69,17 @@
                             </a>
                         </td>
                         <td class="p-4">{{ $order->created_at->format('d M Y') }}</td>
-                        <td class="p-4">${{ number_format($order->price, 2) }}</td>
+                        <td class="p-4">Rp {{ number_format($order->total_amount,  0, ',', '.') }}</td>
                         <td class="p-4">
                             @switch($order->status)
-                                @case('pre-order')
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Pre-order</span>
+                                @case('pending')
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">pending</span>
                                     @break
-                                @case('in_transit')
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">In transit</span>
+                                @case('processing')
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">processing</span>
                                     @break
-                                @case('confirmed')
-                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Confirmed</span>
+                                @case('completed')
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">completed</span>
                                     @break
                                 @case('cancelled')
                                     <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Cancelled</span>

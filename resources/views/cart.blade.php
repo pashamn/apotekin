@@ -81,13 +81,13 @@
             <div class="mt-6 grid grid-cols-2 gap-4">
                 <button 
                     class="w-full py-3 px-4 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 transition"
-                    onclick="window.location.href='{{ route('home') }}'">
+                    onclick="window.location.href='/'">
                     Continue Shopping
                 </button>
 
                 <button 
                     class="w-full py-3 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white transition"
-                    onclick="window.location.href='{{ route('checkout') }}'">
+                    onclick="window.location.href='/checkout'">
                     Proceed to Checkout
                 </button>
             </div>

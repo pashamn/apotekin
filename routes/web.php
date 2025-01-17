@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MyOrderController;
 
 
@@ -29,17 +30,15 @@ Route::get('/product/{id}', [HomeController::class, 'showProduct'])->name('produ
 Route::get('/cart', [CartController::class, 'view'])->name('cart.view')->middleware('auth');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
-// Route untuk menampilkan halaman checkout
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
-// Route untuk memproses checkout
-Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
     Route::post('/my-orders/{id}/order-again', [MyOrderController::class, 'orderAgain'])->name('my.orders.again');
     Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
     Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'storeOrder'])->name('checkout.process');
 });
 
 // Authentication routes
@@ -47,12 +46,6 @@ Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
-    Route::post('/my-orders/{id}/order-again', [MyOrderController::class, 'orderAgain'])->name('my.orders.again');
-    Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
-    Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
-});
 
 // });
 // Admin routes
