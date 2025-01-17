@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\MyOrderController;
 
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -20,7 +22,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/search', [HomeController::class, 'index'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('category.products');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
@@ -30,11 +32,19 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
+    Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
+    Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'storeOrder'])->name('checkout.process');
+});
+
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-// Route::middleware('auth')->group(function () {
+
 
 // });
 // Admin routes
@@ -73,15 +83,17 @@ Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('admin.order');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::get('/admin/order/{id}', [DetailOrderController::class, 'show'])->name('admin.order.show');
+    Route::get('admin/prescription/create/orders', [OrderController::class, 'create'])->name('admin.order.create');
+    Route::post('admin/prescription/create/orders', [OrderController::class, 'store'])->name('admin.order.store');
     
     // Prescriptions
-    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('admin.prescriptions');
-    Route::get('prescriptions/create', [PrescriptionController::class, 'create'])->name('admin.prescriptions.create');
-    Route::post('prescriptions', [PrescriptionController::class, 'store'])->name('admin.prescriptions.store');
-    Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show'])->name('admin.prescriptions.show');
-    Route::get('prescriptions/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('admin.prescriptions.edit');
-    Route::put('prescriptions/{prescription}', [PrescriptionController::class, 'update'])->name('admin.prescriptions.update');
-    Route::delete('prescriptions/{prescription}', [PrescriptionController::class, 'destroy'])->name('admin.prescriptions.destroy');
+    Route::get('prescriptions', [PrescriptionController::class, 'index'])->name('prescriptions.index');
+    Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show'])->name('prescriptions.show');
+    Route::put('/admin/prescriptions/{id}', [PrescriptionController::class, 'approve'])->name('admin.prescriptions.approve');
+    Route::put('/admin/prescriptions/{id}/reject', [PrescriptionController::class, 'reject'])->name('admin.prescriptions.reject');
+    Route::post('prescriptions/{id}/add-order', [PrescriptionController::class, 'addOrder'])->name('prescriptions.addOrder');
+
+
     
     //chart
     

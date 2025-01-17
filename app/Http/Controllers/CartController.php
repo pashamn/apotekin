@@ -19,18 +19,12 @@ class CartController extends Controller
 
         $total = 0 + $subtotal;
 
-
         // Mengirim data ke view
         return view('cart', [
             'carts' => $carts,
             'subtotal' => $subtotal,
             'total' => $total,
         ]);
-    }
-
-    public function home()
-    {
-        return view('admin.produk.index');
     }
 
     public function add(Request $request)
@@ -79,5 +73,4 @@ class CartController extends Controller
             'total' => $total
         ]);
     }
-
 }

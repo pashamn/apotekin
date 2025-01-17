@@ -62,7 +62,7 @@
 
                 <!-- User Info and Icons -->
                 <div class="flex items-center space-x-4">
-                    <!-- Upload Resep Button -->
+                    <!-- Upload Resep Button
                     <button class="text-gray-700 hover:text-primary flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -70,7 +70,7 @@
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
                         <span class="hidden md:inline text-sm">Upload Resep</span>
-                    </button>
+                    </button> -->
 
                     <!-- Keranjang Belanja -->
                     <a href="/cart" class="text-gray-700 hover:text-primary">
@@ -96,11 +96,11 @@
                                 </svg>
                             </button>
                             <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
-                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Orders</a>
+                                <a href="{{ route('my.orders') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">My Orders</a>
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Wallet</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Favorites Items</a> -->
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">My Returns</a> -->
-                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Account</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Resep</a>
                                 <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
                                 <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Privacy</a> -->
                                 <form action="{{ route('logout') }}" method="POST">
@@ -119,8 +119,7 @@
 
     <!-- Categories Bar -->
     <div class="bg-gray-800 text-white py-4 flex justify-center">
-        <form class="flex items-center w-full max-w-md">
-            <!-- Search Input -->
+        <form class="flex items-center w-full max-w-md" action="{{ route('search') }}" method="GET">
             <div class="relative w-full">
                 <input 
                     type="search" 
@@ -130,8 +129,6 @@
                     placeholder="Cari Obat Yang Dibutuhkan..." 
                     required
                 />
-
-                <!-- Search Button -->
                 <button 
                     type="submit" 
                     class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -141,7 +138,18 @@
                     <span class="sr-only">Search</span>
                 </button>
             </div>
-        </form>
+     </form>
+
+    </div>
+    <div id="successModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-bold mb-2 text-green-600">Success!</h2>
+            <p class="text-gray-700">{{ session('success') }}</p>
+            <button onclick="closeModal('successModal')" 
+                    class="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
+                Close
+            </button>
+        </div>
     </div>
 
 
@@ -171,5 +179,33 @@
             }
         });
     </script>
+    <script>
+        // Function to show modal
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        // Function to close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Show modal on page load if session exists
+        window.onload = () => {
+            @if(session('success'))
+                showModal('successModal');
+            @endif
+            @if(session('error'))
+                showModal('errorModal');
+            @endif
+        };
+    </script>
+
 </body>
 </html>

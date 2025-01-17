@@ -21,22 +21,19 @@ class OrderController extends Controller
 
     public function create()
     {
-        $users = User::all(); // Ambil semua user
+        $users = User::all();
         $products = Product::all(); // Ambil semua produk
-        return view('admin.order.create', compact('users', 'products'));
+        return view('admin.order.createorder', compact('users', 'products'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'products' => 'required|array',
-            'products.*' => 'exists:products,id',
-            'quantities' => 'required|array',
-            'quantities.*' => 'required|integer|min:1',
-            'status' => 'required|in:pending,processing,completed,cancelled',
-            'shipping_address' => 'required|string',
-            'payment_method' => 'required|string'
+           'user_id' => $request->user_id,
+            'status' => $request->status,
+            'shipping_address' => $request->shipping_address,
+            'payment_method' => $request->payment_method,
+            'total_amount' => 0,
         ]);
 
         // Buat pesanan baru
