@@ -33,17 +33,14 @@ Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 // Route untuk menampilkan halaman checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
-<<<<<<< Updated upstream
 // Route untuk memproses checkout
 Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
-=======
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [MyOrderController::class, 'index'])->name('my.orders');
     Route::post('/my-orders/{id}/order-again', [MyOrderController::class, 'orderAgain'])->name('my.orders.again');
     Route::get('/my-orders/{id}', [MyOrderController::class, 'orderDetails'])->name('my.orders.details');
     Route::post('/my-orders/{id}/cancel', [MyOrderController::class, 'cancelOrder'])->name('my.orders.cancel');
 });
->>>>>>> Stashed changes
 
 // Authentication routes
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
